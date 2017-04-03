@@ -1,6 +1,8 @@
 require_relative 'piece'
 
 class Board
+  attr_reader :grid
+  
   def initialize()
     @grid = []
     setup_grid
@@ -26,6 +28,12 @@ class Board
     self[end_pos] = self[start_pos]
     self[start_pos] = NullPiece.new
   end
+
+  def in_bounds?(pos)
+    pos.all? { |ele| ele.between(0, 7) }
+  end
+
+  private
 
   def setup_grid
     2.times { @grid << Array.new(8) { Piece.new } }
