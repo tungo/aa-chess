@@ -33,6 +33,10 @@ class Board
     pos.all? { |ele| ele.between?(0, 7) }
   end
 
+  def is_piece?(pos)
+    !self[pos].is_a?(NullPiece)
+  end
+
   private
 
   def setup_grid

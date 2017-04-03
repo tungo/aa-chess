@@ -1,6 +1,7 @@
 require "colorize"
 require_relative "board"
 require_relative "cursor"
+require_relative "all_pieces"
 
 class Display
   attr_reader :cursor
@@ -22,7 +23,7 @@ class Display
         current_pos = [row_idx, col_idx]
 
         if current_pos == @cursor.cursor_pos
-          print piece.to_s.colorize(:red)
+          print piece.to_s.blue.on_white.blink
         else
           print piece.to_s
         end
@@ -42,8 +43,10 @@ end
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
   display = Display.new(board)
-  loop do
-    display.render
-    display.cursor.get_input
-  end
+  # loop do
+    # display.render
+  #   display.cursor.get_input
+  # end
+  bishop = Bishop.new(board, [2,0])
+  p bishop.moves
 end
