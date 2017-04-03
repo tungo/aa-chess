@@ -2,7 +2,7 @@ require_relative 'piece'
 
 class Board
   attr_reader :grid
-  
+
   def initialize()
     @grid = []
     setup_grid
@@ -30,7 +30,7 @@ class Board
   end
 
   def in_bounds?(pos)
-    pos.all? { |ele| ele.between(0, 7) }
+    pos.all? { |ele| ele.between?(0, 7) }
   end
 
   private

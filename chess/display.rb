@@ -3,6 +3,7 @@ require_relative "board"
 require_relative "cursor"
 
 class Display
+  attr_reader :cursor
 
   def initialize(board)
     @board = board
@@ -10,6 +11,7 @@ class Display
   end
 
   def render
+    system('clear')
     print "  "
     8.times { |i| print "#{i} " }
     puts ''
@@ -20,7 +22,7 @@ class Display
         current_pos = [row_idx, col_idx]
 
         if current_pos == @cursor.cursor_pos
-          print piece.to_s.colorize(:green)
+          print piece.to_s.colorize(:red)
         else
           print piece.to_s
         end
@@ -30,7 +32,18 @@ class Display
 
       puts ''
     end
-    
+
     nil
+
+  end
+end
+
+
+if __FILE__ == $PROGRAM_NAME
+  board = Board.new
+  display = Display.new(board)
+  loop do
+    display.render
+    display.cursor.get_input
   end
 end
