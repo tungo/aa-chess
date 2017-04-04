@@ -47,9 +47,15 @@ class Board
     opponent_moves.include?(king_pos)
   end
 
-  # private
+  def checkmate?(color)
+    pieces = pieces_of_color(color)
+    valid_moves = valid_moves_of_pieces(pieces)
 
-  #works
+    in_check?(color) && valid_moves.empty?
+  end
+
+  private
+
   def find_king(color)
     @grid.each_with_index do |row, row_idx|
       row.each_with_index do |piece, col_idx|
@@ -60,7 +66,6 @@ class Board
     end
   end
 
-  #works
   def pieces_of_color(color)
     pieces = []
 
@@ -75,8 +80,17 @@ class Board
     moves = []
 
     pieces.each do |piece|
-      # debugger
       moves.concat(piece.moves)
+    end
+
+    moves.uniq
+  end
+
+  def valid_moves_of_pieces(pieces)
+    moves = []
+
+    pieces.each do |piece|
+      moves.concat(piece.valid_moves)
     end
 
     moves.uniq

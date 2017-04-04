@@ -21,7 +21,7 @@ module SlidingPiece
     valid_moves
   end
 
-  # private
+  private
   def move_dirs
   end
 
