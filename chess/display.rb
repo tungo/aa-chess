@@ -44,9 +44,11 @@ if __FILE__ == $PROGRAM_NAME
   board = Board.new
   display = Display.new(board)
   # loop do
-    # display.render
+    display.render
   #   display.cursor.get_input
   # end
-  bishop = Bishop.new(board, [2,0])
-  p bishop.moves
+  # queen = Queen.new(board, [2,0])
+  # p queen.moves
+  king = King.new(board, [3,3])
+  p king.moves
 end
