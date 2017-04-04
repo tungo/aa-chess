@@ -1,11 +1,6 @@
 class King < Piece
   include SteppingPiece
 
-  def initialize(board, position)
-    @board = board
-    @position = position
-  end
-
   def move_diffs
     [
       [-1, 0],
@@ -19,7 +14,7 @@ class King < Piece
     ]
   end
 
-  def to_s
+  def symbol
     "K"
   end
 end

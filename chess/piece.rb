@@ -1,15 +1,27 @@
-class Piece
-  def initialize
+require 'singleton'
 
+class Piece
+  attr_reader :color, :position
+
+  def initialize(board, position, color)
+    @board = board
+    @position = position
+    @color = color
   end
 
-  def to_s
+  def symbol
     "P"
   end
 end
 
 class NullPiece < Piece
-  def to_s
+  include Singleton
+
+  def moves
+    []
+  end
+
+  def symbol
     "_"
   end
 end
