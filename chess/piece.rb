@@ -1,7 +1,8 @@
 require 'singleton'
 
 class Piece
-  attr_reader :color, :position, :board
+  attr_accessor :position
+  attr_reader :color, :board
 
   def initialize(board, position, color)
     @board = board
@@ -10,7 +11,9 @@ class Piece
   end
 
   def valid_moves
-
+    moves.reject do |move|
+      move_into_check?(move)
+    end
   end
 
   def symbol
@@ -24,7 +27,7 @@ class Piece
   private
 
   def move_into_check?(end_pos)
-    board_clone = @board.clone
+    board_clone = @board.dup
     board_clone.move_piece(@position, end_pos)
     board_clone.in_check?(@color)
   end

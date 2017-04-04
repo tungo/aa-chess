@@ -52,11 +52,17 @@ if __FILE__ == $PROGRAM_NAME
   # end
 
   board.move_piece([1,0], [2,0])
-  display.render
   # pieces = board.pieces_of_color(:red)
   # rook = pieces[8]
-  clone_board = board.dup
-
+  board.move_piece([1, 4], [3,4])
+  board.move_piece([0, 4], [1,4])
+  board.move_piece([1, 4], [2,4])
+  board.move_piece([2, 4], [3,5])
+  board.move_piece([3, 5], [4,5])
+  board.move_piece([6, 3], [5,3])
+  board.move_piece([7, 3], [6,3])
+  queen = board[[6, 3]]
+  display.render
 end
 
 binding.pry

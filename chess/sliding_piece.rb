@@ -21,7 +21,7 @@ module SlidingPiece
     valid_moves
   end
 
-  private
+  # private
   def move_dirs
   end
 
@@ -53,6 +53,11 @@ module SlidingPiece
 
       current_col += d_col
       current_row += d_row
+    end
+
+    if @board.in_bounds?([current_row, current_col]) &&
+       @board[[current_row, current_col]].color != @color
+      valid_pos << [current_row, current_col]
     end
 
     valid_pos

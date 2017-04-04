@@ -26,6 +26,7 @@ class Board
     end
 
     self[end_pos] = self[start_pos]
+    self[end_pos].position = end_pos
     self[start_pos] = NullPiece.instance
   end
 
