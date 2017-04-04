@@ -21,7 +21,7 @@ class Board
   def move_piece(start_pos, end_pos)
     if self[start_pos].is_a?(NullPiece)
       raise("Wrong start position, no piece at this position.")
-    elsif is_piece?(end_pos)
+    elsif is_piece?(end_pos) && !is_opponent_piece?(start_pos, end_pos)
       raise("Wrong end position, there is a piece at this position")
     end
 
@@ -36,6 +36,10 @@ class Board
 
   def is_piece?(pos)
     !self[pos].is_a?(NullPiece)
+  end
+
+  def is_opponent_piece?(start_pos, end_pos)
+    self[start_pos].color != self[end_pos].color
   end
 
   def in_check?(color)

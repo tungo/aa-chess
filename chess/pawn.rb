@@ -8,9 +8,21 @@ class Pawn < Piece
       valid_moves.concat(forward_dir)
     end
 
-    valid_moves.select do |pos|
+
+    valid_moves.select! do |pos|
       @board.in_bounds?(pos) && !@board.is_piece?(pos)
     end
+
+    attack_moves = side_attacks
+    attack_moves.each do |pos|
+      if @board.in_bounds?(pos) &&
+        @board.is_piece?(pos) &&
+        @board[pos].color != @color
+        valid_moves << pos
+      end
+    end
+
+    valid_moves
   end
 
   def at_start_row?
@@ -34,7 +46,7 @@ class Pawn < Piece
   end
 
   def side_attacks
-    if @color == red
+    if @color == :red
       [[@position[0] - 1, @position[1] - 1], [@position[0] - 1, @position[1] + 1]]
     else
       [[@position[0] + 1, @position[1] - 1], [@position[0] + 1, @position[1] + 1]]

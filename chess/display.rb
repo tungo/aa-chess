@@ -59,9 +59,11 @@ if __FILE__ == $PROGRAM_NAME
   board.move_piece([1, 4], [2,4])
   board.move_piece([2, 4], [3,5])
   board.move_piece([3, 5], [4,5])
-  board.move_piece([6, 3], [5,3])
-  board.move_piece([7, 3], [6,3])
-  queen = board[[6, 3]]
+  # board.move_piece([6, 3], [5,3])
+  # board.move_piece([7, 3], [6,3])
+  # queen = board[[6, 3]]
+  board.move_piece([6, 6], [5,6])
+
   display.render
 end
 
