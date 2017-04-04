@@ -53,10 +53,10 @@ if __FILE__ == $PROGRAM_NAME
 
   board.move_piece([1,0], [2,0])
   display.render
-  pieces = board.pieces_of_color(:red)
-  rook = pieces[8]
+  # pieces = board.pieces_of_color(:red)
+  # rook = pieces[8]
+  clone_board = board.dup
 
-  
 end
 
 binding.pry

@@ -1,11 +1,11 @@
 require_relative 'piece'
 
 class Board
-  attr_reader :grid
+  attr_accessor :grid
 
-  def initialize()
-    @grid = []
-    setup_grid
+  def initialize(grid = [])
+    @grid = grid
+    setup_grid if @grid.empty?
   end
 
   def [](pos)
@@ -52,6 +52,26 @@ class Board
     valid_moves = valid_moves_of_pieces(pieces)
 
     in_check?(color) && valid_moves.empty?
+  end
+
+  def dup
+    new_grid = []
+    new_board = Board.new()
+
+    @grid.each_with_index do |row, row_idx|
+      temp_row = []
+      row.each_with_index do |piece, col_idx|
+        if piece.position.nil?
+          temp_row << NullPiece.instance
+        else
+          temp_row << piece.class.new(new_board, piece.position.dup, piece.color)
+        end
+      end
+      new_grid << temp_row
+    end
+
+    new_board.grid = new_grid
+    new_board
   end
 
   private

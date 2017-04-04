@@ -9,12 +9,24 @@ class Piece
     @color = color
   end
 
+  def valid_moves
+
+  end
+
   def symbol
     "P"
   end
 
-  def inspect()
-    "#{self.class} - #{position} - #{color}"
+  # def inspect
+  #   "#{self.class} - #{position} - #{color}"
+  # end
+
+  private
+
+  def move_into_check?(end_pos)
+    board_clone = @board.clone
+    board_clone.move_piece(@position, end_pos)
+    board_clone.in_check?(@color)
   end
 end
 
