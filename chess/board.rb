@@ -30,6 +30,13 @@ class Board
     self[start_pos] = NullPiece.instance
   end
 
+  def move_piece!(start_pos, end_pos)
+    self[end_pos] = self[start_pos]
+    self[end_pos].position = end_pos
+    self[start_pos] = NullPiece.instance
+  end
+
+
   def in_bounds?(pos)
     pos.all? { |ele| ele.between?(0, 7) }
   end
