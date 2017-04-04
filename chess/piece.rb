@@ -17,6 +17,10 @@ end
 class NullPiece < Piece
   include Singleton
 
+  def initialize
+    @color = :black
+  end
+
   def moves
     []
   end

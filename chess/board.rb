@@ -21,12 +21,12 @@ class Board
   def move_piece(start_pos, end_pos)
     if self[start_pos].is_a?(NullPiece)
       raise("Wrong start position, no piece at this position.")
-    elsif self[end_pos].is_a?(Piece)
+    elsif is_piece?(end_pos)
       raise("Wrong end position, there is a piece at this position")
     end
 
     self[end_pos] = self[start_pos]
-    self[start_pos] = NullPiece.new
+    self[start_pos] = NullPiece.instance
   end
 
   def in_bounds?(pos)
@@ -41,25 +41,25 @@ class Board
 
   def setup_grid
     @grid << [
-      Rook.new(@board, [0,0], :black),
-      Knight.new(@board, [0,1], :black),
-      Bishop.new(@board, [0,2], :black),
-      Queen.new(@board, [0,3], :black),
-      King.new(@board, [0,4], :black),
-      Bishop.new(@board, [0,5], :black),
-      Knight.new(@board, [0,6], :black),
-      Rook.new(@board, [0,7], :black)
+      Rook.new(@board, [0,0], :blue),
+      Knight.new(@board, [0,1], :blue),
+      Bishop.new(@board, [0,2], :blue),
+      Queen.new(@board, [0,3], :blue),
+      King.new(@board, [0,4], :blue),
+      Bishop.new(@board, [0,5], :blue),
+      Knight.new(@board, [0,6], :blue),
+      Rook.new(@board, [0,7], :blue)
     ]
 
     @grid << [
-      Pawn.new(@board, [1,0], :black),
-      Pawn.new(@board, [1,1], :black),
-      Pawn.new(@board, [1,2], :black),
-      Pawn.new(@board, [1,3], :black),
-      Pawn.new(@board, [1,4], :black),
-      Pawn.new(@board, [1,5], :black),
-      Pawn.new(@board, [1,6], :black),
-      Pawn.new(@board, [1,7], :black)
+      Pawn.new(@board, [1,0], :blue),
+      Pawn.new(@board, [1,1], :blue),
+      Pawn.new(@board, [1,2], :blue),
+      Pawn.new(@board, [1,3], :blue),
+      Pawn.new(@board, [1,4], :blue),
+      Pawn.new(@board, [1,5], :blue),
+      Pawn.new(@board, [1,6], :blue),
+      Pawn.new(@board, [1,7], :blue)
     ]
 
     4.times { @grid << Array.new(8) { NullPiece.instance } }
