@@ -37,53 +37,100 @@ class Board
     !self[pos].is_a?(NullPiece)
   end
 
-  private
+  def in_check?(color)
+    king_pos = find_king(color)
+    opponent_color = other_color(color)
+
+    opponent_pieces = pieces_of_color(opponent_color)
+    opponent_moves = moves_of_pieces(opponent_pieces)
+
+    opponent_moves.include?(king_pos)
+  end
+
+  # private
+
+  #works
+  def find_king(color)
+    @grid.each_with_index do |row, row_idx|
+      row.each_with_index do |piece, col_idx|
+        if piece.is_a?(King) && piece.color == color
+          return [row_idx, col_idx]
+        end
+      end
+    end
+  end
+
+  #works
+  def pieces_of_color(color)
+    pieces = []
+
+    @grid.each do |row|
+      pieces.concat(row.select { |piece| piece.color == color })
+    end
+
+    pieces
+  end
+
+  def moves_of_pieces(pieces)
+    moves = []
+
+    pieces.each do |piece|
+      # debugger
+      moves.concat(piece.moves)
+    end
+
+    moves.uniq
+  end
+
+  def other_color(color)
+    color == :red ? :blue : :red
+  end
 
   def setup_grid
     @grid << [
-      Rook.new(@board, [0,0], :blue),
-      Knight.new(@board, [0,1], :blue),
-      Bishop.new(@board, [0,2], :blue),
-      Queen.new(@board, [0,3], :blue),
-      King.new(@board, [0,4], :blue),
-      Bishop.new(@board, [0,5], :blue),
-      Knight.new(@board, [0,6], :blue),
-      Rook.new(@board, [0,7], :blue)
+      Rook.new(self, [0,0], :blue),
+      Knight.new(self, [0,1], :blue),
+      Bishop.new(self, [0,2], :blue),
+      Queen.new(self, [0,3], :blue),
+      King.new(self, [0,4], :blue),
+      Bishop.new(self, [0,5], :blue),
+      Knight.new(self, [0,6], :blue),
+      Rook.new(self, [0,7], :blue)
     ]
 
     @grid << [
-      Pawn.new(@board, [1,0], :blue),
-      Pawn.new(@board, [1,1], :blue),
-      Pawn.new(@board, [1,2], :blue),
-      Pawn.new(@board, [1,3], :blue),
-      Pawn.new(@board, [1,4], :blue),
-      Pawn.new(@board, [1,5], :blue),
-      Pawn.new(@board, [1,6], :blue),
-      Pawn.new(@board, [1,7], :blue)
+      Pawn.new(self, [1,0], :blue),
+      Pawn.new(self, [1,1], :blue),
+      Pawn.new(self, [1,2], :blue),
+      Pawn.new(self, [1,3], :blue),
+      Pawn.new(self, [1,4], :blue),
+      Pawn.new(self, [1,5], :blue),
+      Pawn.new(self, [1,6], :blue),
+      Pawn.new(self, [1,7], :blue)
     ]
 
     4.times { @grid << Array.new(8) { NullPiece.instance } }
 
     @grid << [
-      Pawn.new(@board, [6,0], :red),
-      Pawn.new(@board, [6,1], :red),
-      Pawn.new(@board, [6,2], :red),
-      Pawn.new(@board, [6,3], :red),
-      Pawn.new(@board, [6,4], :red),
-      Pawn.new(@board, [6,5], :red),
-      Pawn.new(@board, [6,6], :red),
-      Pawn.new(@board, [6,7], :red)
+      Pawn.new(self, [6,0], :red),
+      Pawn.new(self, [6,1], :red),
+      Pawn.new(self, [6,2], :red),
+      Pawn.new(self, [6,3], :red),
+      Pawn.new(self, [6,4], :red),
+      Pawn.new(self, [6,5], :red),
+      Pawn.new(self, [6,6], :red),
+      Pawn.new(self, [6,7], :red)
     ]
 
     @grid << [
-      Rook.new(@board, [7,0], :red),
-      Knight.new(@board, [7,1], :red),
-      Bishop.new(@board, [7,2], :red),
-      Queen.new(@board, [7,3], :red),
-      King.new(@board, [7,4], :red),
-      Bishop.new(@board, [7,5], :red),
-      Knight.new(@board, [7,6], :red),
-      Rook.new(@board, [7,7], :red)
+      Rook.new(self, [7,0], :red),
+      Knight.new(self, [7,1], :red),
+      Bishop.new(self, [7,2], :red),
+      Queen.new(self, [7,3], :red),
+      King.new(self, [7,4], :red),
+      Bishop.new(self, [7,5], :red),
+      Knight.new(self, [7,6], :red),
+      Rook.new(self, [7,7], :red)
     ]
   end
 

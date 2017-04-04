@@ -9,7 +9,7 @@ class Pawn < Piece
     end
 
     valid_moves.select do |pos|
-      !@board.is_piece?(pos) && @board.in_bounds?(pos)
+      @board.in_bounds?(pos) && !@board.is_piece?(pos)
     end
   end
 
@@ -19,25 +19,25 @@ class Pawn < Piece
 
   def forward_dir
     if @color == :red
-      [[-1, 0]]
+      [[@position[0] - 1, @position[1]]]
     else
-      [[1, 0]]
+      [[@position[0] + 1, @position[1]]]
     end
   end
 
   def forward_steps
     if @color == :red
-      [[-1, 0], [-2, 0]]
+      [[@position[0] - 1, @position[1]], [@position[0] - 2, @position[1]]]
     else
-      [[1, 0], [2, 0]]
+      [[@position[0] + 1, @position[1]], [@position[0] + 2, @position[1]]]
     end
   end
 
   def side_attacks
     if @color == red
-      [[-1, -1], [-1, 1]]
+      [[@position[0] - 1, @position[1] - 1], [@position[0] - 1, @position[1] + 1]]
     else
-      [[1, -1], [1, 1]]
+      [[@position[0] + 1, @position[1] - 1], [@position[0] + 1, @position[1] + 1]]
     end
   end
 

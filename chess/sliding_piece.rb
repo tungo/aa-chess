@@ -5,6 +5,7 @@ module SlidingPiece
 
     move_dirs.each do |dir|
       directions = []
+
       case dir
       when :diagonal
         directions = diagonal_dirs
@@ -13,19 +14,20 @@ module SlidingPiece
       when :vertical
         directions = vertical_dirs
       end
+
       valid_moves.concat(directions)
     end
 
     valid_moves
   end
 
-  private
+  # private
   def move_dirs
   end
 
   def horizontal_dirs
-    grow_unblocked_moves_in_dir(1, 0) +
-    grow_unblocked_moves_in_dir(-1, 0)
+    grow_unblocked_moves_in_dir(0, -1) +
+    grow_unblocked_moves_in_dir(0, 1)
   end
 
   def diagonal_dirs
@@ -36,22 +38,21 @@ module SlidingPiece
   end
 
   def vertical_dirs
-    grow_unblocked_moves_in_dir(0, -1) +
-    grow_unblocked_moves_in_dir(0, 1)
+    grow_unblocked_moves_in_dir(1, 0) +
+    grow_unblocked_moves_in_dir(-1, 0)
   end
 
-  def grow_unblocked_moves_in_dir(dx, dy)
-    current_x = @position[0] + dx
-    current_y = @position[1] + dy
-
+  def grow_unblocked_moves_in_dir(d_row, d_col)
+    current_col = @position[1] + d_col
+    current_row = @position[0] + d_row
     valid_pos = []
 
-    until @board.is_piece?([current_x, current_y]) ||
-          !@board.in_bounds?([current_x, current_y])
-      valid_pos << [current_x, current_y]
+    until !@board.in_bounds?([current_row, current_col]) ||
+        @board.is_piece?([current_row, current_col])
+      valid_pos << [current_row, current_col]
 
-      current_x += dx
-      current_y += dy
+      current_col += d_col
+      current_row += d_row
     end
 
     valid_pos

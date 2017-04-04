@@ -1,7 +1,7 @@
 require 'singleton'
 
 class Piece
-  attr_reader :color, :position
+  attr_reader :color, :position, :board
 
   def initialize(board, position, color)
     @board = board
@@ -11,6 +11,10 @@ class Piece
 
   def symbol
     "P"
+  end
+
+  def inspect()
+    "#{self.class} - #{position} - #{color}"
   end
 end
 

@@ -1,4 +1,5 @@
 require 'pry'
+require 'byebug'
 
 require "colorize"
 require_relative "board"
@@ -52,6 +53,10 @@ if __FILE__ == $PROGRAM_NAME
 
   board.move_piece([1,0], [2,0])
   display.render
+  pieces = board.pieces_of_color(:red)
+  rook = pieces[8]
+
+  
 end
 
 binding.pry
