@@ -13,9 +13,25 @@ class Game
 
   def play
     until @board.checkmate?(:red) || @board.checkmate?(:blue)
-      start_pos, end_pos = @current_player.play_turn
-      
+      begin
+        start_pos, end_pos = @current_player.play_turn
+        @board.move_piece(start_pos, end_pos)
+      rescue RuntimeError => e
+        puts e.message
+        sleep(1)
+        retry
+      end
+
+      switch_player
     end
+
+    Display.new(@board).render
+    switch_player
+    puts "#{@current_player.name} is the winner!"
+  end
+
+  def switch_player
+    @current_player = @current_player == @player1 ? @player2 : @player1
   end
 end
 

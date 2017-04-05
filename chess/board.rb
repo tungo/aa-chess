@@ -19,13 +19,19 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    if self[start_pos].is_a?(NullPiece)
+    piece = self[start_pos]
+
+    unless piece.valid_moves.include?(end_pos)
+      raise('Piece can not move to the end position!')
+    end
+
+    if piece.is_a?(NullPiece)
       raise("Wrong start position, no piece at this position.")
     elsif is_piece?(end_pos) && !is_opponent_piece?(start_pos, end_pos)
       raise("Wrong end position, there is a piece at this position")
     end
 
-    self[end_pos] = self[start_pos]
+    self[end_pos] = piece
     self[end_pos].position = end_pos
     self[start_pos] = NullPiece.instance
   end

@@ -1,4 +1,6 @@
 class HumanPlayer
+  attr_reader :name
+  
   def initialize(name)
     @name = name
   end
@@ -22,11 +24,11 @@ class HumanPlayer
 
     start_pos = old_val
 
+
     old_val = 1
     new_val = 2
     loop do
       @display.render
-
       puts "You chose #{@board[start_pos].symbol} at #{start_pos}"
       puts "Please choose a position to move to"
 

@@ -41,7 +41,14 @@ class Cursor
 
   def get_input
     key = KEYMAP[read_char]
-    handle_key(key)
+    value = handle_key(key)
+
+    while value.nil?
+      key = KEYMAP[read_char]
+      value = handle_key(key)
+    end
+
+    value
   end
 
   private

@@ -6,8 +6,11 @@ module SteppingPiece
     end
 
     potential_pos.select do |pos|
-      @board.in_bounds?(pos) && !@board.is_piece?(pos)
+      @board.in_bounds?(pos) &&
+        ( @board.is_opponent_piece?(@position, pos) ||
+        !@board.is_piece?(pos) )
     end
+
   end
 
   def move_diffs
