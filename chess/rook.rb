@@ -6,6 +6,6 @@ class Rook < Piece
   end
 
   def symbol
-    "R"
+    "♖"
   end
 end

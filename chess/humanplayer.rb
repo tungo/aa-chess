@@ -1,8 +1,9 @@
 class HumanPlayer
-  attr_reader :name
-  
-  def initialize(name)
+  attr_reader :name, :color
+
+  def initialize(name, color)
     @name = name
+    @color = color
   end
 
   def play_turn
@@ -15,10 +16,15 @@ class HumanPlayer
       @display.render
 
       puts "It is #{@name}'s turn"
-      puts "Please choose a piece to move from"
+      puts "Please choose a #{@color} piece to move from"
 
       new_val = @display.cursor.get_input
-      break if old_val == new_val
+      if old_val == new_val
+        break if @board[new_val].color == @color
+
+        puts 'This piece is not your color'
+        sleep(1)
+      end
       old_val = new_val
     end
 

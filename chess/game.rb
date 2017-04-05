@@ -36,7 +36,7 @@ class Game
 end
 
 if __FILE__ == $PROGRAM_NAME
-  game = Game.new(HumanPlayer.new("Jin"), HumanPlayer.new("Tu"))
+  game = Game.new(HumanPlayer.new("Jin", :blue), HumanPlayer.new("Tu", :red ))
   game.play
 
   # board = Board.new

@@ -6,6 +6,6 @@ class Queen < Piece
   end
 
   def symbol
-    "Q"
+    "♕"
   end
 end
